@@ -1,4 +1,4 @@
-# uhifadhilabs/map-module
+# uhifadhi/map-module
 
 The platform's **map machinery** — self-hosted Leaflet, one basemap seam with a configurable
 satellite provider, the boundary drawing, and the chrome every map in the product wears.
@@ -22,7 +22,7 @@ broken screens. Core means "seeded active in every area", not "cannot be turned 
 ## Install
 
 ```bash
-composer require uhifadhilabs/map-module
+composer require uhifadhi/map-module
 ```
 
 Then three things, all of which a Flex recipe would write for you:

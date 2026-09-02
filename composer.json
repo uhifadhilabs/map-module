@@ -1,5 +1,5 @@
 {
-    "name": "uhifadhilabs/map-module",
+    "name": "uhifadhi/map-module",
     "description": "Map: the platform's map machinery — self-hosted Leaflet, the one basemap seam (configurable satellite provider: Esri, Google Map Tiles or a custom XYZ/WMTS source), the boundary drawing and the map chrome every map in the product wears.",
     "type": "symfony-bundle",
     "keywords": [
@@ -26,7 +26,7 @@
         "symfony/framework-bundle": "^7.3 || ^8.0",
         "symfony/http-kernel": "^7.3 || ^8.0",
         "twig/twig": "^3.12",
-        "uhifadhilabs/module-contracts": "dev-main"
+        "uhifadhi/module-contracts": "dev-main"
     },
     "autoload": {
         "psr-4": {
