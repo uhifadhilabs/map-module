@@ -1,0 +1,81 @@
+{
+    "name": "uhifadhilabs/map-module",
+    "description": "Map: the platform's map machinery — self-hosted Leaflet, the one basemap seam (configurable satellite provider: Esri, Google Map Tiles or a custom XYZ/WMTS source), the boundary drawing and the map chrome every map in the product wears.",
+    "type": "symfony-bundle",
+    "keywords": [
+        "map",
+        "leaflet",
+        "basemap",
+        "tiles",
+        "geojson",
+        "conservation",
+        "symfony",
+        "uhifadhi"
+    ],
+    "license": "AGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Ezekiel Mjema",
+            "homepage": "https://github.com/eemjema"
+        }
+    ],
+    "require": {
+        "php": ">=8.4",
+        "symfony/config": "^7.3 || ^8.0",
+        "symfony/dependency-injection": "^7.3 || ^8.0",
+        "symfony/framework-bundle": "^7.3 || ^8.0",
+        "symfony/http-kernel": "^7.3 || ^8.0",
+        "twig/twig": "^3.12",
+        "uhifadhilabs/module-contracts": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "UhifadhiLabs\\Map\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "UhifadhiLabs\\Map\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.2",
+        "phpunit/phpunit": "^13.2",
+        "symfony/asset": "^7.3 || ^8.0",
+        "symfony/asset-mapper": "^7.3 || ^8.0",
+        "symfony/twig-bundle": "^7.3 || ^8.0"
+    },
+    "suggest": {
+        "symfony/asset-mapper": "Required for the importmap assets (uhifadhi/basemaps, uhifadhi/boundary, uhifadhi/map-chrome) to be served.",
+        "symfony/twig-bundle": "Required for map_basemap_attributes(), which publishes the configured satellite provider to the browser."
+    },
+    "scripts": {
+        "cs:fix": "php-cs-fixer fix",
+        "cs:check": "php-cs-fixer fix --dry-run --diff",
+        "phpstan": "phpstan analyse --no-progress --memory-limit=1G",
+        "test": "phpunit",
+        "check": [
+            "@cs:check",
+            "@phpstan",
+            "@test"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.1-dev"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "name": "module-contracts",
+            "type": "vcs",
+            "url": "https://github.com/uhifadhilabs/module-contracts"
+        }
+    ]
+}
