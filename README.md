@@ -34,14 +34,14 @@ UhifadhiLabs\Map\UhifadhiLabsMapBundle::class => ['all' => true],
 ```
 
 **2. Name the three shared modules in your `importmap.php`.** The bundle registers its `assets/`
-directory under the namespace `@uhifadhilabs/map-module`; the import *names* have to be declared by
+directory under the namespace `@uhifadhi/map-module`; the import *names* have to be declared by
 the host, because importmap entries are read from that one file and AssetMapper offers no
 extension point for a bundle to add to it:
 
 ```php
-'uhifadhi/basemaps'   => ['path' => '@uhifadhilabs/map-module/basemaps.js'],
-'uhifadhi/boundary'   => ['path' => '@uhifadhilabs/map-module/boundary.js'],
-'uhifadhi/map-chrome' => ['path' => '@uhifadhilabs/map-module/chrome.js'],
+'uhifadhi/basemaps'   => ['path' => '@uhifadhi/map-module/basemaps.js'],
+'uhifadhi/boundary'   => ['path' => '@uhifadhi/map-module/boundary.js'],
+'uhifadhi/map-chrome' => ['path' => '@uhifadhi/map-module/chrome.js'],
 ```
 
 **3. Publish the configured provider on your `<body>`** (`templates/base.html.twig`):

@@ -76,7 +76,7 @@ final class UhifadhiLabsMapBundle extends AbstractBundle
      * The AssetMapper namespace this bundle's JavaScript is served under. A host's
      * importmap.php names these logical paths; see the README.
      */
-    public const string ASSET_NAMESPACE = '@uhifadhilabs/map-module';
+    public const string ASSET_NAMESPACE = '@uhifadhi/map-module';
 
     /** Config lives under "map:", not the class-derived "uhifadhi_labs_map:". */
     protected string $extensionAlias = 'map';

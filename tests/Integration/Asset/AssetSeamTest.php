@@ -43,9 +43,9 @@ final class AssetSeamTest extends KernelTestCase
      */
     public static function sharedModules(): iterable
     {
-        yield 'uhifadhi/basemaps' => ['@uhifadhilabs/map-module/basemaps.js'];
-        yield 'uhifadhi/boundary' => ['@uhifadhilabs/map-module/boundary.js'];
-        yield 'uhifadhi/map-chrome' => ['@uhifadhilabs/map-module/chrome.js'];
+        yield 'uhifadhi/basemaps' => ['@uhifadhi/map-module/basemaps.js'];
+        yield 'uhifadhi/boundary' => ['@uhifadhi/map-module/boundary.js'];
+        yield 'uhifadhi/map-chrome' => ['@uhifadhi/map-module/chrome.js'];
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('sharedModules')]
@@ -69,7 +69,7 @@ final class AssetSeamTest extends KernelTestCase
      */
     public function testTheNamespaceIsTheOneTheBundlePublishes(): void
     {
-        self::assertSame('@uhifadhilabs/map-module', UhifadhiLabsMapBundle::ASSET_NAMESPACE);
+        self::assertSame('@uhifadhi/map-module', UhifadhiLabsMapBundle::ASSET_NAMESPACE);
 
         foreach (self::sharedModules() as [$logicalPath]) {
             self::assertStringStartsWith(UhifadhiLabsMapBundle::ASSET_NAMESPACE.'/', $logicalPath);
