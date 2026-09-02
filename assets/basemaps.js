@@ -13,7 +13,7 @@
  *      region"
  *
  * The whole product therefore ran on the understudy while filling the console
- * with refusals. The choice is now configuration (uhifadhilabs/map-module, the
+ * with refusals. The choice is now configuration (uhifadhi/map-module, the
  * `map.satellite` tree), published to the document as one JSON object on
  * <body data-map-satellite> by {{ map_basemap_attributes() }}, and read here:
  *
