@@ -43,18 +43,24 @@ final class ModuleSeamRegistrationTest extends KernelTestCase
     }
 
     /**
-     * THE CORE FLAG. Every module before this one was installable and arrived
+     * THE BASE FLAG. Every module before this one was installable and arrived
      * parked. This one is machinery four other surfaces already depend on, so
      * it arrives on.
+     *
+     * The flag is read through ModuleProviderInterface deliberately — the CONTRACT's
+     * method, not this class's. A provider is free to keep any number of extra
+     * public methods; only the ones on the interface are the ones the seam will
+     * ever call, and this bundle once proved that the hard way by answering core()
+     * to a contract that had started asking base().
      */
-    public function testItDeclaresItselfCore(): void
+    public function testItDeclaresItselfBase(): void
     {
         self::bootKernel();
 
         /** @var CollectedModules $catalogue */
         $catalogue = self::getContainer()->get(CollectedModules::class);
 
-        self::assertTrue($catalogue->bySlug()['map']->core());
+        self::assertTrue($catalogue->bySlug()['map']->base());
     }
 
     /**

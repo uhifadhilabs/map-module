@@ -6,10 +6,15 @@ satellite provider, the boundary drawing, and the chrome every map in the produc
 Mechanism, not a screen: this bundle owns no entities and no pages. What it owns is everything a
 map is made of before anyone decides what to draw on it.
 
-It is the platform's first **core** module. Patrol plates, incident plates, the area overview and
+It is the platform's first **base** module. Patrol plates, incident plates, the area overview and
 the zones editor all import its assets, so a host without it does not have fewer features — it has
-broken screens. Core means "seeded active in every area", not "cannot be turned off"; see
+broken screens. Base means "seeded active in every area", not "cannot be turned off"; see
 [module-contracts](https://github.com/uhifadhilabs/module-contracts).
+
+It registers with [the seam](https://github.com/uhifadhilabs/seam-module) by tagging its provider
+`uhifadhi.module`, which is the whole of the join — the bundle depends on `uhifadhi/module-contracts`
+and on nothing else of the platform's. In particular it does **not** depend on the shell: a module
+renders *in* the shell through tags, never by requiring it.
 
 ## Contents
 

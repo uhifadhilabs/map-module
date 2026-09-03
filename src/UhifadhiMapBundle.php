@@ -26,7 +26,7 @@ use Uhifadhi\Map\Twig\MapExtension;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 /**
- * Map — the platform's map machinery, and the first CORE module.
+ * Map — the platform's map machinery, and the first BASE module.
  *
  * MECHANISM, NOT A SCREEN. This bundle owns no entities and no pages. What it
  * owns is everything a map is made of before anyone decides what to draw on it:
@@ -35,12 +35,12 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
  * DIM, the base-layer menu, fullscreen, the scale bar, the Ctrl/⌘-scroll bargain
  * — that every map in the product wears.
  *
- * It is CORE because the alternative is dishonest: patrol plates, incident
+ * It is BASE because the alternative is dishonest: patrol plates, incident
  * plates, the area overview and the zones editor all import these assets, so a
  * host that omitted this bundle would not have "fewer features", it would have
  * four broken screens. Still a module, though, and shipped like one — the same
  * bundle shape, the same contracts, the same seams — which is the whole point of
- * the tier: core is a DEFAULT, not a different kind of thing.
+ * the tier: base is a DEFAULT, not a different kind of thing.
  *
  * WHAT A HOST MUST DO (three lines, all documented in the README):
  *   1. register the bundle;
