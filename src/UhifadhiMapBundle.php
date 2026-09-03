@@ -58,7 +58,7 @@ final class UhifadhiMapBundle extends AbstractBundle
      * The self-hosted Leaflet build, as a host links it.
      *
      * Constants rather than literals for the same reason patrol's stylesheet is
-     * one: this path is written in the host layout AND in every module bundle's
+     * one: this path is written in the host layout AND in every module's
      * base template, and a path typed five times is a path that eventually
      * differs by one character in one of them.
      *

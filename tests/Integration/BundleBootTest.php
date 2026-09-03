@@ -47,7 +47,7 @@ final class BundleBootTest extends KernelTestCase
 
     /**
      * The Leaflet paths are constants, not literals, because they are written in
-     * the host layout AND in every module bundle's base template. This holds
+     * the host layout AND in every module's base template. This holds
      * them to the directory the files are actually in — a bundle's public/ dir
      * is served under bundles/<lowercased bundle name without "Bundle">.
      */

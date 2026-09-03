@@ -23,7 +23,7 @@ use Uhifadhi\Seam\UhifadhiSeamBundle;
 /**
  * THE JOIN, END TO END, AGAINST THE REAL SEAM.
  *
- * A module bundle's own tests can only ever prove that it declared something.
+ * A module's own tests can only ever prove that it declared something.
  * What matters to an installation is whether the runtime AGREES — whether the
  * word the provider says and the word uhifadhi/seam-module reads are the same
  * word. They were not: the contract renamed core() to base() at v0.1.0, this
