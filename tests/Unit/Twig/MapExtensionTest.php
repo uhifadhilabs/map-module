@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Tests\Unit\Twig;
+namespace Uhifadhi\Map\Tests\Unit\Twig;
 
 use PHPUnit\Framework\TestCase;
-use UhifadhiLabs\Map\DependencyInjection\MapConfiguration;
-use UhifadhiLabs\Map\Model\SatelliteSource;
-use UhifadhiLabs\Map\Twig\MapExtension;
+use Uhifadhi\Map\DependencyInjection\MapConfiguration;
+use Uhifadhi\Map\Model\SatelliteSource;
+use Uhifadhi\Map\Twig\MapExtension;
 
 /**
  * The attribute a host puts on its <body>. It is written into a double-quoted

@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Module;
+namespace Uhifadhi\Map\Module;
 
-use UhifadhiLabs\Map\DependencyInjection\MapConfiguration;
-use UhifadhiLabs\Map\Model\SatelliteSource;
-use UhifadhiLabs\ModuleContracts\ModuleProviderInterface;
-use UhifadhiLabs\ModuleContracts\ModuleProviderTrait;
+use Uhifadhi\Map\DependencyInjection\MapConfiguration;
+use Uhifadhi\Map\Model\SatelliteSource;
+use Uhifadhi\ModuleContracts\ModuleProviderInterface;
+use Uhifadhi\ModuleContracts\ModuleProviderTrait;
 
 /**
  * Declares the one module this bundle contributes — "Map".

@@ -8,7 +8,7 @@
          failOnNotice="true"
          failOnWarning="true">
     <php>
-        <env name="KERNEL_CLASS" value="UhifadhiLabs\Map\Tests\Integration\TestKernel"/>
+        <env name="KERNEL_CLASS" value="Uhifadhi\Map\Tests\Integration\TestKernel"/>
         <!--
             No database, and none coming: this bundle owns no entities. A map is
             machinery, not a record — what it draws belongs to the modules that

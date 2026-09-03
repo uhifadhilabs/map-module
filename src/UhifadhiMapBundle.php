@@ -11,17 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map;
+namespace Uhifadhi\Map;
 
 use Symfony\Component\AssetMapper\AssetMapperInterface;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
-use UhifadhiLabs\Map\DependencyInjection\MapConfiguration;
-use UhifadhiLabs\Map\Model\SatelliteSource;
-use UhifadhiLabs\Map\Module\MapModuleProvider;
-use UhifadhiLabs\Map\Twig\MapExtension;
+use Uhifadhi\Map\DependencyInjection\MapConfiguration;
+use Uhifadhi\Map\Model\SatelliteSource;
+use Uhifadhi\Map\Module\MapModuleProvider;
+use Uhifadhi\Map\Twig\MapExtension;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
@@ -51,7 +51,7 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
  * Leaflet itself needs nothing: it is served out of this bundle's public/ dir,
  * which AssetMapper registers by itself.
  */
-final class UhifadhiLabsMapBundle extends AbstractBundle
+final class UhifadhiMapBundle extends AbstractBundle
 {
     /**
      * The self-hosted Leaflet build, as a host links it.
@@ -69,8 +69,8 @@ final class UhifadhiLabsMapBundle extends AbstractBundle
      * with no configuration at all, and versions its contents — including the
      * marker and layers PNGs that leaflet.css asks for by relative url.
      */
-    public const string LEAFLET_JS = 'bundles/uhifadhilabsmap/leaflet/leaflet.js';
-    public const string LEAFLET_CSS = 'bundles/uhifadhilabsmap/leaflet/leaflet.css';
+    public const string LEAFLET_JS = 'bundles/uhifadhimap/leaflet/leaflet.js';
+    public const string LEAFLET_CSS = 'bundles/uhifadhimap/leaflet/leaflet.css';
 
     /**
      * The AssetMapper namespace this bundle's JavaScript is served under. A host's

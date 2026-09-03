@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Tests\Integration\Asset;
+namespace Uhifadhi\Map\Tests\Integration\Asset;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\AssetMapper\AssetMapperInterface;
-use UhifadhiLabs\Map\UhifadhiLabsMapBundle;
+use Uhifadhi\Map\UhifadhiMapBundle;
 
 /**
  * THE ASSET SEAM, end to end in a real kernel.
@@ -69,10 +69,10 @@ final class AssetSeamTest extends KernelTestCase
      */
     public function testTheNamespaceIsTheOneTheBundlePublishes(): void
     {
-        self::assertSame('@uhifadhi/map-module', UhifadhiLabsMapBundle::ASSET_NAMESPACE);
+        self::assertSame('@uhifadhi/map-module', UhifadhiMapBundle::ASSET_NAMESPACE);
 
         foreach (self::sharedModules() as [$logicalPath]) {
-            self::assertStringStartsWith(UhifadhiLabsMapBundle::ASSET_NAMESPACE.'/', $logicalPath);
+            self::assertStringStartsWith(UhifadhiMapBundle::ASSET_NAMESPACE.'/', $logicalPath);
         }
     }
 

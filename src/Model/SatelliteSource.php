@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Model;
+namespace Uhifadhi\Map\Model;
 
-use UhifadhiLabs\Map\DependencyInjection\MapConfiguration;
+use Uhifadhi\Map\DependencyInjection\MapConfiguration;
 
 /**
  * The configured satellite source, as the BROWSER needs to hear it.

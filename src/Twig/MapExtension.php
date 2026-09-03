@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Twig;
+namespace Uhifadhi\Map\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use UhifadhiLabs\Map\Model\SatelliteSource;
+use Uhifadhi\Map\Model\SatelliteSource;
 
 /**
  * The one seam by which a deployment's configured imagery reaches the browser.

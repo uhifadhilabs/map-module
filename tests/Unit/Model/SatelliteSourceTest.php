@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Tests\Unit\Model;
+namespace Uhifadhi\Map\Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
-use UhifadhiLabs\Map\DependencyInjection\MapConfiguration;
-use UhifadhiLabs\Map\Model\SatelliteSource;
+use Uhifadhi\Map\DependencyInjection\MapConfiguration;
+use Uhifadhi\Map\Model\SatelliteSource;
 
 /**
  * What the browser is told, and — just as importantly — what it is not told.

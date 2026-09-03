@@ -30,12 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "UhifadhiLabs\\Map\\": "src/"
+            "Uhifadhi\\Map\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "UhifadhiLabs\\Map\\Tests\\": "tests/"
+            "Uhifadhi\\Map\\Tests\\": "tests/"
         }
     },
     "require-dev": {

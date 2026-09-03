@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Tests\Integration;
+namespace Uhifadhi\Map\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -19,8 +19,8 @@ use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\AssetMapper\AssetMapperInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel;
-use UhifadhiLabs\Map\Tests\Integration\Fixtures\CollectedModules;
-use UhifadhiLabs\Map\UhifadhiLabsMapBundle;
+use Uhifadhi\Map\Tests\Integration\Fixtures\CollectedModules;
+use Uhifadhi\Map\UhifadhiMapBundle;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
@@ -46,7 +46,7 @@ final class TestKernel extends Kernel
     {
         yield new FrameworkBundle();
         yield new TwigBundle();
-        yield new UhifadhiLabsMapBundle();
+        yield new UhifadhiMapBundle();
     }
 
     protected function configureContainer(ContainerConfigurator $container): void

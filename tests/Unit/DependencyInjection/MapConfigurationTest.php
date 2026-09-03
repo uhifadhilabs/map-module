@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Tests\Unit\DependencyInjection;
+namespace Uhifadhi\Map\Tests\Unit\DependencyInjection;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
-use UhifadhiLabs\Map\DependencyInjection\MapConfiguration;
+use Uhifadhi\Map\DependencyInjection\MapConfiguration;
 
 /**
  * The satellite provider tree — the config a deployment writes to say which

@@ -30,7 +30,7 @@ Then three things, all of which a Flex recipe would write for you:
 **1. Register the bundle** (`config/bundles.php`):
 
 ```php
-UhifadhiLabs\Map\UhifadhiLabsMapBundle::class => ['all' => true],
+Uhifadhi\Map\UhifadhiMapBundle::class => ['all' => true],
 ```
 
 **2. Name the three shared modules in your `importmap.php`.** The bundle registers its `assets/`
@@ -58,8 +58,8 @@ Leaflet needs no step at all. Link it from your layout with the bundle's own con
 is never typed twice:
 
 ```twig
-<link rel="stylesheet" href="{{ asset(constant('UhifadhiLabs\\Map\\UhifadhiLabsMapBundle::LEAFLET_CSS')) }}">
-<script src="{{ asset(constant('UhifadhiLabs\\Map\\UhifadhiLabsMapBundle::LEAFLET_JS')) }}"></script>
+<link rel="stylesheet" href="{{ asset(constant('Uhifadhi\\Map\\UhifadhiMapBundle::LEAFLET_CSS')) }}">
+<script src="{{ asset(constant('Uhifadhi\\Map\\UhifadhiMapBundle::LEAFLET_JS')) }}"></script>
 ```
 
 Leaflet is a classic script that publishes `window.L`, and the map controllers read it from there —
@@ -135,7 +135,7 @@ so a placeholder credit is emitted if you leave it out.
 | `assets/basemaps.js` | `uhifadhi/basemaps` | street + satellite base layers, the provider seam |
 | `assets/boundary.js` | `uhifadhi/boundary` | the AOI outline, its casing and its outside-the-area scrim |
 | `assets/chrome.js` | `uhifadhi/map-chrome` | zoom, DIM, base-layer menu, fullscreen, scale, Ctrl/⌘-scroll |
-| `public/leaflet/` | `bundles/uhifadhilabsmap/leaflet/…` | the self-hosted Leaflet build and its images |
+| `public/leaflet/` | `bundles/uhifadhimap/leaflet/…` | the self-hosted Leaflet build and its images |
 
 MapLibre is deliberately not used: raster tiles plus GeoJSON need no WebGL, and WebGL failed
 silently — a blank map, no error — in constrained environments.

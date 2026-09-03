@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Tests\Unit\Assets;
+namespace Uhifadhi\Map\Tests\Unit\Assets;
 
 use PHPUnit\Framework\TestCase;
 

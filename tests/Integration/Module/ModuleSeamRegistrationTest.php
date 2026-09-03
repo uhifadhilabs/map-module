@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Tests\Integration\Module;
+namespace Uhifadhi\Map\Tests\Integration\Module;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use UhifadhiLabs\Map\Module\MapModuleProvider;
-use UhifadhiLabs\Map\Tests\Integration\Fixtures\CollectedModules;
+use Uhifadhi\Map\Module\MapModuleProvider;
+use Uhifadhi\Map\Tests\Integration\Fixtures\CollectedModules;
 
 /**
  * The host contract: installing this bundle puts "map" in the catalogue, and

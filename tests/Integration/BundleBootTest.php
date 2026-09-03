@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace UhifadhiLabs\Map\Tests\Integration;
+namespace Uhifadhi\Map\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use UhifadhiLabs\Map\UhifadhiLabsMapBundle;
+use Uhifadhi\Map\UhifadhiMapBundle;
 
 /**
  * The smoke test: registering the bundle in a real kernel compiles a real
@@ -26,10 +26,10 @@ final class BundleBootTest extends KernelTestCase
     {
         $kernel = self::bootKernel();
 
-        self::assertArrayHasKey('UhifadhiLabsMapBundle', $kernel->getBundles());
+        self::assertArrayHasKey('UhifadhiMapBundle', $kernel->getBundles());
         self::assertInstanceOf(
-            UhifadhiLabsMapBundle::class,
-            $kernel->getBundle('UhifadhiLabsMapBundle'),
+            UhifadhiMapBundle::class,
+            $kernel->getBundle('UhifadhiMapBundle'),
         );
     }
 
@@ -41,7 +41,7 @@ final class BundleBootTest extends KernelTestCase
     {
         $kernel = self::bootKernel();
 
-        self::assertSame('map', $kernel->getBundle('UhifadhiLabsMapBundle')
+        self::assertSame('map', $kernel->getBundle('UhifadhiMapBundle')
             ->getContainerExtension()?->getAlias());
     }
 
@@ -61,8 +61,8 @@ final class BundleBootTest extends KernelTestCase
         // but only if they are here.
         self::assertFileExists($public.'/leaflet/images/marker-icon.png');
 
-        self::assertSame('bundles/uhifadhilabsmap/leaflet/leaflet.js', UhifadhiLabsMapBundle::LEAFLET_JS);
-        self::assertSame('bundles/uhifadhilabsmap/leaflet/leaflet.css', UhifadhiLabsMapBundle::LEAFLET_CSS);
+        self::assertSame('bundles/uhifadhimap/leaflet/leaflet.js', UhifadhiMapBundle::LEAFLET_JS);
+        self::assertSame('bundles/uhifadhimap/leaflet/leaflet.css', UhifadhiMapBundle::LEAFLET_CSS);
     }
 
     protected function tearDown(): void
