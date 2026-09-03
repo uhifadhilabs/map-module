@@ -3,6 +3,7 @@
     "description": "Map: the platform's map machinery — self-hosted Leaflet, the one basemap seam (configurable satellite provider: Esri, Google Map Tiles or a custom XYZ/WMTS source), the boundary drawing and the map chrome every map in the product wears.",
     "type": "symfony-bundle",
     "keywords": [
+        "symfony-ux",
         "map",
         "leaflet",
         "basemap",

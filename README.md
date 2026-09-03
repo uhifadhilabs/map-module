@@ -30,26 +30,40 @@ renders *in* the shell through tags, never by requiring it.
 composer require uhifadhi/map-module
 ```
 
-Then three things, all of which a Flex recipe would write for you:
+With the [recipe endpoint](https://github.com/uhifadhilabs/recipes) configured, that is the whole
+of the install: Flex registers the bundle, writes `config/packages/map.yaml`, and writes the three
+importmap entries. Two of those three are worth spelling out, because they are what a host would
+otherwise type.
 
-**1. Register the bundle** (`config/bundles.php`):
+**1. The bundle registration** (`config/bundles.php`) — the recipe's `bundles` block:
 
 ```php
 Uhifadhi\Map\UhifadhiMapBundle::class => ['all' => true],
 ```
 
-**2. Name the three shared modules in your `importmap.php`.** The bundle registers its `assets/`
-directory under the namespace `@uhifadhi/map-module`; the import *names* have to be declared by
-the host, because importmap entries are read from that one file and AssetMapper offers no
-extension point for a bundle to add to it:
+**2. The three shared modules in `importmap.php`** — **Flex writes these automatically**, and no
+longer by way of the recipe. This package declares them itself, in `assets/package.json`, and
+Symfony Flex runs `importmap:require` once per entry on install (see [shipping importmap assets
+from a bundle](#shipping-importmap-assets-from-a-bundle)). What lands in a host is:
 
 ```php
-'uhifadhi/basemaps'   => ['path' => '@uhifadhi/map-module/basemaps.js'],
-'uhifadhi/boundary'   => ['path' => '@uhifadhi/map-module/boundary.js'],
-'uhifadhi/map-chrome' => ['path' => '@uhifadhi/map-module/chrome.js'],
+'uhifadhi/basemaps'   => ['path' => './vendor/uhifadhi/map-module/assets/basemaps.js'],
+'uhifadhi/boundary'   => ['path' => './vendor/uhifadhi/map-module/assets/boundary.js'],
+'uhifadhi/map-chrome' => ['path' => './vendor/uhifadhi/map-module/assets/chrome.js'],
 ```
 
-**3. Publish the configured provider on your `<body>`** (`templates/base.html.twig`):
+The paths are the vendor-relative form because that is what `importmap:require` writes — it
+resolves whatever path it is given back to an asset and then stores the shortest form it can. The
+equivalent logical path `@uhifadhi/map-module/basemaps.js` resolves to the same file, and either is
+correct in a hand-written `importmap.php`.
+
+Two conditions and no more: the host must **have** an `importmap.php` (i.e. run AssetMapper — a
+host that installed this bundle for the Leaflet build alone has nothing to write into, and Flex
+writes nothing), and `symfony/flex` must be allowed to run its plugin. Neither is special to this
+package: it is how `symfony/stimulus-bundle` gets its loader into your importmap too.
+
+**3. Publish the configured provider on your `<body>`** (`templates/base.html.twig`) — the one
+line still yours to write, because it goes in a template only you own:
 
 ```twig
 <body {{ map_basemap_attributes() }}>
@@ -141,6 +155,7 @@ so a placeholder credit is emitted if you leave it out.
 | `assets/boundary.js` | `uhifadhi/boundary` | the AOI outline, its casing and its outside-the-area scrim |
 | `assets/chrome.js` | `uhifadhi/map-chrome` | zoom, DIM, base-layer menu, fullscreen, scale, Ctrl/⌘-scroll |
 | `public/leaflet/` | `bundles/uhifadhimap/leaflet/…` | the self-hosted Leaflet build and its images |
+| `assets/package.json` | — | the `symfony.importmap` block Flex writes the three entries from |
 
 MapLibre is deliberately not used: raster tiles plus GeoJSON need no WebGL, and WebGL failed
 silently — a blank map, no error — in constrained environments.
@@ -155,10 +170,30 @@ Written down because it is the part with the sharp edges.
 - A bundle's `public/` directory is registered automatically under
   `bundles/<lowercased bundle class name without "Bundle">` — no configuration, no `assets:install`.
   Relative `url()`s inside a CSS file there are rewritten, so Leaflet's marker PNGs come along.
-- **A bundle cannot add importmap entries.** `importmap.php` is read as one file, and the component
-  exposes no extension point. So the *directory* is the bundle's contract and the *import names*
-  are the host's three lines. This is the seam's one genuine rough edge; a Flex recipe hides it at
-  install time but does not remove it.
+- **A bundle cannot add importmap entries — but a *package* can.** `importmap.php` is read as one
+  file and AssetMapper exposes no extension point, which is true and was never the whole story: the
+  thing that writes a host's `importmap.php` on install is not AssetMapper, it is Flex. Declare the
+  entries in `assets/package.json` under `symfony.importmap` and Flex runs `importmap:require` for
+  each one (`PackageJsonSynchronizer::resolveImportMapPackages`, `::updateImportMap`):
+
+  ```json
+  "symfony": {
+      "importmap": {
+          "uhifadhi/basemaps": "path:%PACKAGE%/basemaps.js"
+      }
+  }
+  ```
+
+  `%PACKAGE%` becomes the directory holding `assets/package.json`, so the entry names a real file
+  whatever the host's vendor layout is. It is the form `symfony/stimulus-bundle` ships its loader
+  with.
+- **The keyword is the whole switch.** Flex opens a package's `assets/package.json` only if the
+  composer package declares `symfony-ux` in its `keywords`
+  (`PackageJsonSynchronizer::resolvePackageJson`). Without it everything installs and nothing is
+  written — no error, just a blank map on every page that draws one. Hence a test that asserts the
+  keyword rather than trusting it to survive the next edit of `composer.json`.
+- A *recipe* cannot do this job: recipes copy files and patch YAML, and `importmap.php` is PHP.
+  That is why the entries live in the package and the recipe carries only `config/packages/map.yaml`.
 - The guard on the prepend matters: `interface_exists(AssetMapperInterface::class)` as well as
   `hasExtension('framework')`, because AssetMapper is optional and a host may install this bundle
   for the Leaflet build alone.

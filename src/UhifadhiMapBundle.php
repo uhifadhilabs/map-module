@@ -42,12 +42,13 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
  * bundle shape, the same contracts, the same seams — which is the whole point of
  * the tier: base is a DEFAULT, not a different kind of thing.
  *
- * WHAT A HOST MUST DO (three lines, all documented in the README):
- *   1. register the bundle;
- *   2. add the three importmap entries pointing at this bundle's logical paths
- *      (AssetMapper has no way for a bundle to contribute importmap entries
- *      itself — see the README's "shipping importmap assets" note);
- *   3. put {{ map_basemap_attributes() }} on its <body>.
+ * WHAT A HOST MUST DO (all documented in the README):
+ *   1. register the bundle — the recipe's job;
+ *   2. put {{ map_basemap_attributes() }} on its <body> — the one line that is
+ *      genuinely the host's, because it goes in a template only the host owns.
+ * The three importmap entries used to be a third step and are not any more:
+ * this package declares them in assets/package.json and Flex writes them on
+ * install (see prependExtension below).
  * Leaflet itself needs nothing: it is served out of this bundle's public/ dir,
  * which AssetMapper registers by itself.
  */
@@ -73,8 +74,9 @@ final class UhifadhiMapBundle extends AbstractBundle
     public const string LEAFLET_CSS = 'bundles/uhifadhimap/leaflet/leaflet.css';
 
     /**
-     * The AssetMapper namespace this bundle's JavaScript is served under. A host's
-     * importmap.php names these logical paths; see the README.
+     * The AssetMapper namespace this bundle's JavaScript is served under, and
+     * the npm-side name in assets/package.json — which must be the composer
+     * package name with an '@', because that is the key Flex works from.
      */
     public const string ASSET_NAMESPACE = '@uhifadhi/map-module';
 
@@ -92,13 +94,18 @@ final class UhifadhiMapBundle extends AbstractBundle
          * The three shared map modules, shipped under an AssetMapper namespace
          * exactly as symfony/ux-turbo does (TurboExtension::prepend).
          *
-         * This registers the DIRECTORY, which is all a bundle can do. The
-         * IMPORT NAMES — uhifadhi/basemaps, uhifadhi/boundary,
-         * uhifadhi/map-chrome — still have to be declared in the host's
-         * importmap.php, because importmap entries are read from that one file
-         * and AssetMapper offers no extension point for a bundle to add to it.
-         * That is the seam's one rough edge and it is documented rather than
-         * hidden; a Flex recipe writes those three lines on install.
+         * This registers the DIRECTORY, which is all a BUNDLE can do: importmap
+         * entries are read from the host's single importmap.php and AssetMapper
+         * offers no extension point for a bundle to add to it.
+         *
+         * The IMPORT NAMES — uhifadhi/basemaps, uhifadhi/boundary,
+         * uhifadhi/map-chrome — are contributed by the PACKAGE instead, from
+         * assets/package.json's symfony.importmap block: Flex reads it on
+         * install (given the symfony-ux keyword in composer.json) and runs
+         * importmap:require once per entry. The two halves meet here — the
+         * entries name files under this directory — so a rename on either side
+         * without the other is a blank map, which is what
+         * tests/Unit/Assets/ImportmapContributionTest.php exists to catch.
          *
          * Guarded, because AssetMapper is optional: a host could install this
          * bundle for the Leaflet build and the provider config alone.
