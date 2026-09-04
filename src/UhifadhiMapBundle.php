@@ -42,7 +42,8 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
  * bundle shape, the same contracts, the same seams — which is the whole point of
  * the tier: base is a DEFAULT, not a different kind of thing.
  *
- * WHAT A HOST MUST DO (all documented in the README):
+ * WHAT A HOST MUST DO (both documented in the README; the importmap mechanics
+ * in docs/importmap-assets.md):
  *   1. register the bundle — the recipe's job;
  *   2. put {{ map_basemap_attributes() }} on its <body> — the one line that is
  *      genuinely the host's, because it goes in a template only the host owns.
