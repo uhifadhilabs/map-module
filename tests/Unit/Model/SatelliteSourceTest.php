@@ -42,6 +42,23 @@ final class SatelliteSourceTest extends TestCase
         self::assertArrayNotHasKey('key', $source->toBrowserPayload());
     }
 
+    /**
+     * The key normally arrives as `%env(default::UHIFADHI_GOOGLE_MAPS_API_KEY)%`,
+     * which is what this bundle's own recipe writes. Symfony's `default`
+     * processor treats an UNSET var — and an var set to the empty string, which
+     * is what the recipe's .env line leaves behind — as "no value", so what
+     * actually reaches this constructor is null, not ''. A container built with
+     * no key present must still build: an image is compiled with no runtime
+     * secrets, and a deployment that has not bought a key yet is a normal one.
+     */
+    public function testAnUnresolvedKeyEnvArrivesAsNullAndIsSimplyNoKey(): void
+    {
+        $source = new SatelliteSource(MapConfiguration::PROVIDER_GOOGLE, null);
+
+        self::assertSame(MapConfiguration::PROVIDER_ESRI, $source->effectiveProvider());
+        self::assertArrayNotHasKey('key', $source->toBrowserPayload());
+    }
+
     public function testGoogleWithAKeyPublishesIt(): void
     {
         $source = new SatelliteSource(MapConfiguration::PROVIDER_GOOGLE, 'AIza-test');

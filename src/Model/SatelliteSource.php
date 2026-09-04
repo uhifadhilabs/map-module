@@ -30,19 +30,39 @@ use Uhifadhi\Map\DependencyInjection\MapConfiguration;
  */
 final readonly class SatelliteSource
 {
+    /** Absent, empty and unresolved are one state here: no key. */
+    private string $apiKey;
+
     /**
      * @param string      $provider    one of {@see MapConfiguration::PROVIDERS}
-     * @param string      $apiKey      Google Maps API key; empty for every other provider
+     * @param string|null $apiKey      Google Maps API key; empty or null for every other
+     *                                 provider, and null for a google deployment whose key
+     *                                 env resolved to nothing — see below
      * @param string|null $urlTemplate XYZ/WMTS template for the custom provider
      * @param string|null $attribution the credit line a custom source's licence requires
      */
     public function __construct(
         private string $provider = MapConfiguration::PROVIDER_ESRI,
-        private string $apiKey = '',
+        ?string $apiKey = '',
         private ?string $urlTemplate = null,
         private ?string $attribution = null,
         private int $maxZoom = MapConfiguration::DEFAULT_MAX_ZOOM,
     ) {
+        /*
+         * WHY NULLABLE. The key reaches this constructor as an env placeholder
+         * resolved at runtime, and the placeholder this bundle's own recipe
+         * writes is `%env(default::UHIFADHI_GOOGLE_MAPS_API_KEY)%`. Symfony's
+         * `default` processor answers with the named fallback parameter when the
+         * var is missing OR empty — and `default::` names no parameter, so that
+         * answer is null. The recipe's .env line ships the var set to the empty
+         * string, so null is not the exotic path: it is the ordinary one for
+         * every deployment that has not bought a key, and for every container
+         * image, which is compiled with no runtime secrets at all.
+         *
+         * Rejecting it with a TypeError would turn "no satellite key" into "no
+         * application", which is the opposite of what this class exists to do.
+         */
+        $this->apiKey = $apiKey ?? '';
     }
 
     /**
