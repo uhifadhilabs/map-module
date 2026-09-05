@@ -51,6 +51,10 @@ The three importmap entries are written by Flex, not by the recipe; what lands i
 two conditions it depends on, are in [shipping importmap assets from a
 bundle](docs/importmap-assets.md).
 
+Upgrading from 0.1? Map is now infrastructure, which removed the `map.module_category` option — an
+installation that kept the 0.1 config must delete that line before `cache:clear` will pass. The
+exact line and error are in [upgrading from 0.1 to 0.2](docs/upgrading-0.1-to-0.2.md).
+
 ## Getting started
 
 **Publish the configured provider on your `<body>`** (`templates/base.html.twig`) — the one
@@ -89,6 +93,8 @@ The satellite imagery is `esri` by default and needs no key; choosing another pr
   a host's `importmap.php`, and the sharp edges of doing it from a package.
 - [Development](docs/development.md) — installing the bundle for work on it, and running `composer
   check`.
+- [Upgrading from 0.1 to 0.2](docs/upgrading-0.1-to-0.2.md) — why `map.module_category` is gone,
+  and the one line to remove from `config/packages/map.yaml` before `cache:clear` will pass.
 
 ## License
 
