@@ -46,7 +46,7 @@
         "symfony/asset": "^7.3 || ^8.0",
         "symfony/asset-mapper": "^7.3 || ^8.0",
         "symfony/twig-bundle": "^7.3 || ^8.0",
-        "uhifadhi/seam-module": "^0.1"
+        "uhifadhi/seam-module": "^0.1 || ^0.2"
     },
     "suggest": {
         "symfony/asset-mapper": "Required for the importmap assets (uhifadhi/basemaps, uhifadhi/boundary, uhifadhi/map-chrome) to be served.",
