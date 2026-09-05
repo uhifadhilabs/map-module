@@ -26,8 +26,7 @@
         "symfony/dependency-injection": "^7.3 || ^8.0",
         "symfony/framework-bundle": "^7.3 || ^8.0",
         "symfony/http-kernel": "^7.3 || ^8.0",
-        "twig/twig": "^3.12",
-        "uhifadhi/module-contracts": "^0.1 || ^0.3"
+        "twig/twig": "^3.12"
     },
     "autoload": {
         "psr-4": {
@@ -46,6 +45,7 @@
         "symfony/asset": "^7.3 || ^8.0",
         "symfony/asset-mapper": "^7.3 || ^8.0",
         "symfony/twig-bundle": "^7.3 || ^8.0",
+        "uhifadhi/module-contracts": "^0.1 || ^0.3",
         "uhifadhi/seam-module": "^0.1 || ^0.2"
     },
     "suggest": {

@@ -21,7 +21,6 @@ use Symfony\Component\Config\Definition\Builder\NodeDefinition;
  * in config/packages/map.yaml:
  *
  *   map:
- *     module_category: operations
  *     satellite:
  *       provider: esri                  # esri (default) | google | custom
  *       max_zoom: 19
@@ -87,10 +86,6 @@ final class MapConfiguration
 
         $root
             ->children()
-                ->scalarNode('module_category')
-                    ->info('Catalogue category the Map module is filed under in each area.')
-                    ->defaultValue('operations')->cannotBeEmpty()
-                ->end()
                 ->arrayNode('satellite')
                     ->info('Which imagery the Satellite base layer draws.')
                     ->addDefaultsIfNotSet()

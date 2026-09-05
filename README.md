@@ -8,15 +8,28 @@ satellite provider, the boundary drawing, and the chrome every map in the produc
 Mechanism, not a screen: this bundle owns no entities and no pages. What it owns is everything a
 map is made of before anyone decides what to draw on it.
 
-It is the platform's first **base** module. Patrol plates, incident plates, the area overview and
-the zones editor all import its assets, so a host without it does not have fewer features — it has
-broken screens. Base means "seeded active in every area", not "cannot be turned off"; see
-[module-contracts](https://github.com/uhifadhilabs/module-contracts).
+It is an **infrastructure** module. The fleet has two tiers (see
+[module-contracts](https://github.com/uhifadhilabs/module-contracts)):
 
-It registers with [the seam](https://github.com/uhifadhilabs/seam-module) by tagging its provider
-`uhifadhi.module`, which is the whole of the join — the bundle depends on `uhifadhi/module-contracts`
-and on nothing else of the platform's. In particular it does **not** depend on the shell: a module
-renders *in* the shell through tags, never by requiring it.
+- a **capability** module (patrol, incident) is the per-area grid — an admin switches it on, it
+  arrives default-off, and it is ledgered per area in `area_module`;
+- an **infrastructure** module (map, widget, storage, area, team) is machinery every relevant
+  screen already imports — installed means on, everywhere, never a per-area choice, never in the
+  catalogue, the grid, or the ledger.
+
+Map is infrastructure because patrol plates, incident plates, the area overview and the zones editor
+all draw with its assets: a host without it does not have fewer features, it has broken screens.
+That is not an opt-in, so map is not offered as one. It contributes **no** `uhifadhi.module`
+provider — nothing for the seam to collect, no catalogue tile, no ledger row, no route to gate. It
+is guaranteed present by the composer graph instead: `area-module` hard-requires it.
+
+> Map used to register a provider with `base()` true, seeding itself active in every area's ledger.
+> The two-tier ruling retired that: "on by default in a ledger" and "not ledgered at all" are
+> different claims, and for machinery four surfaces depend on, the honest one is the latter. All of
+> the rendering machinery below is unchanged — only the per-area-module identity is gone.
+
+It does **not** depend on the shell: a module renders *in* the shell through tags, never by
+requiring it.
 
 ## Install
 

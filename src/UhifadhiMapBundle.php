@@ -20,13 +20,12 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 use Uhifadhi\Map\DependencyInjection\MapConfiguration;
 use Uhifadhi\Map\Model\SatelliteSource;
-use Uhifadhi\Map\Module\MapModuleProvider;
 use Uhifadhi\Map\Twig\MapExtension;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 /**
- * Map — the platform's map machinery, and the first BASE module.
+ * Map — the platform's map machinery. INFRASTRUCTURE, not a catalogue module.
  *
  * MECHANISM, NOT A SCREEN. This bundle owns no entities and no pages. What it
  * owns is everything a map is made of before anyone decides what to draw on it:
@@ -35,12 +34,20 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
  * DIM, the base-layer menu, fullscreen, the scale bar, the Ctrl/⌘-scroll bargain
  * — that every map in the product wears.
  *
- * It is BASE because the alternative is dishonest: patrol plates, incident
- * plates, the area overview and the zones editor all import these assets, so a
+ * THE TWO TIERS. A CAPABILITY module (patrol, incident) is the per-area grid an
+ * admin switches on, default off, ledgered per area. An INFRASTRUCTURE module is
+ * machinery every map-bearing screen already imports: patrol plates, incident
+ * plates, the area overview and the zones editor all draw with these assets, so a
  * host that omitted this bundle would not have "fewer features", it would have
- * four broken screens. Still a module, though, and shipped like one — the same
- * bundle shape, the same contracts, the same seams — which is the whole point of
- * the tier: base is a DEFAULT, not a different kind of thing.
+ * four broken screens. That is not an opt-in, so map is not offered as one: it
+ * contributes NO "uhifadhi.module" provider, appears in no catalogue, in no
+ * per-area grid and in no ledger. It is installed-means-on, and enforcement is
+ * the composer graph — area-module hard-requires it — not a toggle.
+ *
+ * This bundle once DID register a provider with base()=true, seeding itself
+ * active in every area's ledger. The two-tier ruling retired that: "on by default
+ * in a ledger" and "not in the ledger at all" are different claims, and for
+ * machinery four surfaces depend on, the honest one is the latter.
  *
  * WHAT A HOST MUST DO (both documented in the README; the importmap mechanics
  * in docs/importmap-assets.md):
@@ -175,17 +182,6 @@ final class UhifadhiMapBundle extends AbstractBundle
                 ->args([service('map.satellite_source')])
                 ->tag('twig.extension');
         }
-
-        /*
-         * The one module this bundle contributes. The host tags every
-         * ModuleProviderInterface via registerForAutoconfiguration, but that only
-         * fires for autoconfigured services — and a reusable bundle does not
-         * autoconfigure — so the tag is applied explicitly here.
-         */
-        $category = \is_string($config['module_category'] ?? null) ? $config['module_category'] : 'operations';
-        $services->set('map.module_provider', MapModuleProvider::class)
-            ->args([$category, service('map.satellite_source')])
-            ->tag('uhifadhi.module');
     }
 
     /**

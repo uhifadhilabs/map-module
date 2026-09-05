@@ -53,7 +53,6 @@ final class MapConfigurationTest extends TestCase
         self::assertIsArray($config['satellite']);
         self::assertSame(MapConfiguration::PROVIDER_ESRI, $config['satellite']['provider']);
         self::assertSame(19, $config['satellite']['max_zoom']);
-        self::assertSame('operations', $config['module_category']);
     }
 
     public function testGoogleIsOptedIntoByNameAndTakesItsKeyFromTheConfig(): void
